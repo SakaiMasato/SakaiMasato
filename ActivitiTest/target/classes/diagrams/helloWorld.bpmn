@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="helloWorld" name="HelloWorldProcess" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="apply" name="提交申请" activiti:assignee="张三"></userTask>
+    <userTask id="agree1" name="审批【部门经理】" activiti:assignee="李四"></userTask>
+    <userTask id="agree2" name="审批【总经理】" activiti:assignee="王五"></userTask>
+    <sequenceFlow id="applyFlow" name="发起人提交申请" sourceRef="startevent1" targetRef="apply"></sequenceFlow>
+    <sequenceFlow id="agreeFlow1" name="一级经理审批" sourceRef="apply" targetRef="agree1"></sequenceFlow>
+    <sequenceFlow id="agreeFlow2" name="二级经理审批" sourceRef="agree1" targetRef="agree2"></sequenceFlow>
+    <sequenceFlow id="end" name="结束" sourceRef="agree2" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_helloWorld">
+    <bpmndi:BPMNPlane bpmnElement="helloWorld" id="BPMNPlane_helloWorld">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="260.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="260.0" y="360.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="apply" id="BPMNShape_apply">
+        <omgdc:Bounds height="55.0" width="105.0" x="225.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="agree1" id="BPMNShape_agree1">
+        <omgdc:Bounds height="55.0" width="105.0" x="225.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="agree2" id="BPMNShape_agree2">
+        <omgdc:Bounds height="55.0" width="105.0" x="225.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="applyFlow" id="BPMNEdge_applyFlow">
+        <omgdi:waypoint x="277.0" y="95.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="120.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="277.0" y="95.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="agreeFlow1" id="BPMNEdge_agreeFlow1">
+        <omgdi:waypoint x="277.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="210.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="277.0" y="175.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="agreeFlow2" id="BPMNEdge_agreeFlow2">
+        <omgdi:waypoint x="277.0" y="265.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="290.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="277.0" y="265.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="end" id="BPMNEdge_end">
+        <omgdi:waypoint x="277.0" y="345.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="360.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="277.0" y="345.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

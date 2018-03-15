@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="parallelGateway" name="并行网关" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="deliver" name="发货" activiti:assignee="店小二"></userTask>
+    <userTask id="pay" name="付款" activiti:assignee="客户爸爸"></userTask>
+    <userTask id="getMoney" name="收款" activiti:assignee="店小二"></userTask>
+    <userTask id="getGoods" name="收货" activiti:assignee="客户爸爸"></userTask>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <parallelGateway id="parallelgateway2" name="Parallel Gateway"></parallelGateway>
+    <userTask id="order" name="下单" activiti:assignee="客户爸爸"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="order"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="order" targetRef="parallelgateway1"></sequenceFlow>
+    <sequenceFlow id="sell" name="卖家" sourceRef="parallelgateway1" targetRef="deliver"></sequenceFlow>
+    <sequenceFlow id="buy" name="买家" sourceRef="parallelgateway1" targetRef="pay"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="deliver" targetRef="getMoney"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="pay" targetRef="getGoods"></sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="getGoods" targetRef="parallelgateway2"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="getMoney" targetRef="parallelgateway2"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow9" sourceRef="parallelgateway2" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_parallelGateway">
+    <bpmndi:BPMNPlane bpmnElement="parallelGateway" id="BPMNPlane_parallelGateway">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="300.0" y="1.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="deliver" id="BPMNShape_deliver">
+        <omgdc:Bounds height="55.0" width="105.0" x="110.0" y="171.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="pay" id="BPMNShape_pay">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="171.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getMoney" id="BPMNShape_getMoney">
+        <omgdc:Bounds height="55.0" width="105.0" x="110.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getGoods" id="BPMNShape_getGoods">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="297.0" y="121.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway2" id="BPMNShape_parallelgateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="297.0" y="341.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="order" id="BPMNShape_order">
+        <omgdc:Bounds height="55.0" width="105.0" x="265.0" y="61.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="300.0" y="451.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="317.0" y="36.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="61.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="370.0" y="88.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="121.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sell" id="BPMNEdge_sell">
+        <omgdi:waypoint x="297.0" y="141.0"></omgdi:waypoint>
+        <omgdi:waypoint x="162.0" y="171.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="216.0" y="141.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="buy" id="BPMNEdge_buy">
+        <omgdi:waypoint x="337.0" y="141.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="171.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="369.0" y="141.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="162.0" y="226.0"></omgdi:waypoint>
+        <omgdi:waypoint x="162.0" y="261.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="472.0" y="226.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="261.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="472.0" y="316.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="341.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="162.0" y="316.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="341.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="317.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="428.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="451.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

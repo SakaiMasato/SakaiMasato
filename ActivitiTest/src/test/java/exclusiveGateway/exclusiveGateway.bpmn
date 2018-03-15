@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="exclusiveGateway" name="排他网关" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway" default="default"></exclusiveGateway>
+    <userTask id="dpManagerAgree" name="部门经理同意" activiti:assignee="部门经理王"></userTask>
+    <userTask id="accountConfirm" name="财务确认" activiti:assignee="会计王"></userTask>
+    <userTask id="bigBossAgree" name="大老板同意" activiti:assignee="大老板王"></userTask>
+    <sequenceFlow id="default" name="默认财务处理" sourceRef="exclusivegateway1" targetRef="accountConfirm"></sequenceFlow>
+    <sequenceFlow id="lt1000" name="大于1000" sourceRef="exclusivegateway1" targetRef="bigBossAgree">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${message>1000}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="gt500lteq1000" name="大于500小于等于1000" sourceRef="exclusivegateway1" targetRef="dpManagerAgree">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${message>500 && message<=1000}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="dpManagerAgree" targetRef="accountConfirm"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="bigBossAgree" targetRef="accountConfirm"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow9" sourceRef="accountConfirm" targetRef="endevent1"></sequenceFlow>
+    <userTask id="apply" name="申请报销" activiti:assignee="张晓明"></userTask>
+    <sequenceFlow id="flow10" sourceRef="startevent1" targetRef="apply"></sequenceFlow>
+    <sequenceFlow id="flow11" sourceRef="apply" targetRef="exclusivegateway1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_exclusiveGateway">
+    <bpmndi:BPMNPlane bpmnElement="exclusiveGateway" id="BPMNPlane_exclusiveGateway">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="297.0" y="1.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="297.0" y="130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="dpManagerAgree" id="BPMNShape_dpManagerAgree">
+        <omgdc:Bounds height="55.0" width="105.0" x="140.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="accountConfirm" id="BPMNShape_accountConfirm">
+        <omgdc:Bounds height="55.0" width="105.0" x="265.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bigBossAgree" id="BPMNShape_bigBossAgree">
+        <omgdc:Bounds height="55.0" width="105.0" x="390.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="300.0" y="380.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="apply" id="BPMNShape_apply">
+        <omgdc:Bounds height="55.0" width="105.0" x="265.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="default" id="BPMNEdge_default">
+        <omgdi:waypoint x="317.0" y="170.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="280.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="250.0" y="200.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="lt1000" id="BPMNEdge_lt1000">
+        <omgdi:waypoint x="317.0" y="170.0"></omgdi:waypoint>
+        <omgdi:waypoint x="361.0" y="179.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="207.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="329.0" y="165.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="gt500lteq1000" id="BPMNEdge_gt500lteq1000">
+        <omgdi:waypoint x="297.0" y="150.0"></omgdi:waypoint>
+        <omgdi:waypoint x="192.0" y="180.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="179.0" y="135.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="192.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="442.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="317.0" y="335.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="380.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="314.0" y="36.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="60.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="317.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="317.0" y="130.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
