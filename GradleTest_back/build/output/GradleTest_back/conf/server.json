@@ -1,0 +1,20 @@
+{
+    "productName": "GradleTest_back",
+    "servletContainer": {
+        "id": "tomcat8",
+        "version": "8.0.44",
+        "description": "Tomcat 8.0.44"
+    },
+    "serverConfig": {
+        "httpPort": 8080
+    },
+    "webApps": [
+        {
+            "contextPath": "/CPMgmtWeb",
+            "resourceBase": "webapps/Test.war",
+            "extraResourceBases": [
+                "extraResources/GradleTest_back/WebContent"
+            ]
+        }
+    ]
+}

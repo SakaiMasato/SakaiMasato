@@ -1,0 +1,6 @@
+<xml>
+	<db>
+		<dbuser value="dev">dev</dbuser>
+		<dbuser value="devpwd">devpwd</dbuser>
+	</db>
+</xml>

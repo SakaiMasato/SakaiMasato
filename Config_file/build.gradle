@@ -1,0 +1,30 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+import java.text.SimpleDateFormat;
+
+
+apply plugin: 'java'
+
+processResources {//多环境打包
+    println "==> Load configuration for $env"
+    println env
+    def config =  new ConfigSlurper(env).parse(file("config.groovy").toURI().toURL()).toProperties()
+println config
+    from(sourceSets.main.resources.srcDirs) {
+        filter(ReplaceTokens, tokens: config, beginToken : '${', endToken : '}')
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4';
+}
+
+def getDate(){
+	return new SimpleDateFormat("yyyyMMdd").format(new Date());
+}
+
+task testDate(){
+	String str = getDate();
+    println str;
+}
+
+
